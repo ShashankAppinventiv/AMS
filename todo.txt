@@ -1,0 +1,14 @@
+Schema user
+ 1:username (string)    
+2:email (string)
+3:password(string)
+4:address(string)
+5:status(boolean)
+6:Timestamps
+7:profile(blob)
+8:mob number
+9:gender(string)
+10:dob(date)
+11:firstname
+12:lastname
+
