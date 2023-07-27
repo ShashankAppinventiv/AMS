@@ -29,7 +29,7 @@ export const newUserValidate=(req:Request,res:Response,next: () => void)=>{
 
 export const loginValidation=(req:Request,res:Response,next:()=>void)=>{
       const isValid=Joi.object({
-        name:Joi.string().required(),
+        username:Joi.string().required(),
         password:Joi.string().min(8).required()
       })
       let result=isValid.validate(req.body)

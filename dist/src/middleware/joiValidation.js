@@ -30,7 +30,7 @@ const newUserValidate = (req, res, next) => {
 exports.newUserValidate = newUserValidate;
 const loginValidation = (req, res, next) => {
     const isValid = joi_1.default.object({
-        name: joi_1.default.string().required(),
+        username: joi_1.default.string().required(),
         password: joi_1.default.string().min(8).required()
     });
     let result = isValid.validate(req.body);

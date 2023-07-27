@@ -7,6 +7,7 @@ import redisClient, { redFun } from './src/provider/redis'//redis
 //importing routers
 import signup from './src/router/user/signup'
 import login from './src/router/user/login'
+import logout from './src/router/user/logout'
 //All constant decleration
 
 const app=express()
@@ -18,6 +19,7 @@ app.use(express.json())
 
 app.use('/user',signup)
 app.use('/user',login)
+app.use('/user',logout)
 
 redFun();//function calling for redis connection
 app.listen(port,()=>{
