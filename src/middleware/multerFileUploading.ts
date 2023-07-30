@@ -1,8 +1,6 @@
 import multer from 'multer'
 import { Request,Response } from 'express'
 
-
-
 //multer
 export const upload = multer({
     storage:multer.diskStorage({
@@ -10,11 +8,7 @@ export const upload = multer({
             cb(null,"uploads")
         },
         filename:function(req,file,cb){
-            cb(null,file.originalname)
+            cb(null,req.body.filename=file.originalname)
         }
     })
 }).single("profile");
-
-export const caller=(req:Request,res:Response)=>{
-    console.log(req.body)
-}

@@ -22,6 +22,6 @@ sequelize.authenticate().then(() => {
 sequelize.sync().then(() => {
     console.log("All table are created");
 }).catch((err) => {
-    console.log("Error occured table can't created");
+    console.log("Error occured table can't created ", err);
 });
 exports.default = sequelize;

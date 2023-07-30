@@ -2,12 +2,17 @@ import express from 'express';
 import dotenv from 'dotenv'
 //database importing
 
-import redisClient, { redFun } from './src/provider/redis'//redis
+import { redFun } from './src/provider/redis'//redis
 
 //importing routers
-import signup from './src/router/user/signup'
-import login from './src/router/user/login'
-import logout from './src/router/user/logout'
+import signup from './src/router/user/auth/signup'
+import login from './src/router/user/auth/login'
+import logout from './src/router/user/auth/logout'
+import getProfile from './src/router/user/profile/getProfile'
+import addAddress from './src/router/user/profile/addAddress'
+import forgetPass from './src/router/user/auth/forgetPass'
+import addProfilePic from './src/router/user/profile/addPicture'
+import addProduct from './src/router/activity/addProduct'
 //All constant decleration
 
 const app=express()
@@ -20,7 +25,11 @@ app.use(express.json())
 app.use('/user',signup)
 app.use('/user',login)
 app.use('/user',logout)
-
+app.use("/user",getProfile)
+app.use("/user",addAddress)
+app.use('/user',forgetPass)
+app.use('/user',addProfilePic)
+app.use('/product',addProduct)
 redFun();//function calling for redis connection
 app.listen(port,()=>{
     console.log(`Listen to the port ${port}`)

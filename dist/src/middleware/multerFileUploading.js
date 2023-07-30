@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.caller = exports.upload = void 0;
+exports.upload = void 0;
 const multer_1 = __importDefault(require("multer"));
 //multer
 exports.upload = (0, multer_1.default)({
@@ -12,11 +12,7 @@ exports.upload = (0, multer_1.default)({
             cb(null, "uploads");
         },
         filename: function (req, file, cb) {
-            cb(null, file.originalname);
+            cb(null, req.body.filename = file.originalname);
         }
     })
 }).single("profile");
-const caller = (req, res) => {
-    console.log(req.body);
-};
-exports.caller = caller;
