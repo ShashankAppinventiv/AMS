@@ -25,9 +25,7 @@ export const sessionCheck=async (req:Request,res:Response,next:()=>void)=>{
                     ]      
                 }
             })
-            console.log(data,decode.id,typeof decode.id)
             data=JSON.parse(JSON.stringify(data))
-            console.log(data)
             if(data)
             {
               redisclient.setEx(`${decode?.id}`,3600,"true")

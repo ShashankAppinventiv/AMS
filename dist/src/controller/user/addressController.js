@@ -23,7 +23,6 @@ const addAddressController = (req, res) => __awaiter(void 0, void 0, void 0, fun
             zipcode: req.body.zipcode,
             address_type: req.body.address_type
         });
-        console.log(data);
         res.status(201).send(data);
     }
     catch (error) {

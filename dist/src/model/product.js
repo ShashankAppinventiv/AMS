@@ -19,10 +19,11 @@ exports.productSchema = database_1.default.define("product", {
         type: sequelize_typescript_1.DataType.STRING
     },
     base_price: {
-        type: sequelize_typescript_1.DataType.INTEGER
+        type: sequelize_typescript_1.DataType.FLOAT
     },
     bidding_price: {
-        type: sequelize_typescript_1.DataType.FLOAT
+        type: sequelize_typescript_1.DataType.FLOAT,
+        defaultValue: 0
     },
     bidderId: {
         type: sequelize_typescript_1.DataType.INTEGER,
@@ -30,10 +31,9 @@ exports.productSchema = database_1.default.define("product", {
             model: user_1.userSchema,
             key: 'id', // The column in the referenced table to use as the reference
         },
-        allowNull: false,
         onDelete: 'CASCADE'
     },
-    SellerId: {
+    sellerId: {
         type: sequelize_typescript_1.DataType.INTEGER,
         references: {
             model: user_1.userSchema,
@@ -42,8 +42,8 @@ exports.productSchema = database_1.default.define("product", {
         allowNull: false,
         onDelete: 'CASCADE'
     },
-    category: {
-        type: sequelize_typescript_1.DataType.STRING,
+    categoryId: {
+        type: sequelize_typescript_1.DataType.INTEGER,
     },
     addressId: {
         type: sequelize_typescript_1.DataType.INTEGER,

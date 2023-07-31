@@ -9,21 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProfileController = void 0;
-const user_1 = require("../../model/user");
-const updateProfileController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.list = void 0;
+const sequelize_1 = require("sequelize");
+const product_1 = require("../model/product");
+const list = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let id = req.body.id;
-        delete req.body.id;
-        yield user_1.userSchema.update(req.body, {
+        console.log(req.body.id);
+        let data = yield product_1.productSchema.findAll({
+            attributes: ['id', 'name', 'title', 'description', 'base_price'],
             where: {
-                id: id
+                sellerId: {
+                    [sequelize_1.Op.not]: parseInt(req.body.id)
+                }
             }
         });
-        res.status(200).send("Update successfully");
+        res.send(data);
     }
     catch (error) {
         res.status(404).send(error);
     }
 });
-exports.updateProfileController = updateProfileController;
+exports.list = list;

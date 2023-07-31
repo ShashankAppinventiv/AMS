@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { redFun } from './src/provider/redis'//redis
 
 //importing routers
+//user routes
 import signup from './src/router/user/auth/signup'
 import login from './src/router/user/auth/login'
 import logout from './src/router/user/auth/logout'
@@ -12,7 +13,12 @@ import getProfile from './src/router/user/profile/getProfile'
 import addAddress from './src/router/user/profile/addAddress'
 import forgetPass from './src/router/user/auth/forgetPass'
 import addProfilePic from './src/router/user/profile/addPicture'
+import addDetails from './src/router/user/profile/updateProfileDetails'
+//Product Routes
 import addProduct from './src/router/activity/addProduct'
+import deleteProduct from './src/router/activity/deleteRouter'
+import buyProductRoutes from './src/router/activity/buyProduct'
+import filterCategory from './src/router/activity/filter'
 //All constant decleration
 
 const app=express()
@@ -29,8 +35,13 @@ app.use("/user",getProfile)
 app.use("/user",addAddress)
 app.use('/user',forgetPass)
 app.use('/user',addProfilePic)
+app.use('/user',addDetails)
 app.use('/product',addProduct)
+app.use('/product',deleteProduct)
+app.use('/product',buyProductRoutes)
+app.use('/product',filterCategory)
 redFun();//function calling for redis connection
+
 app.listen(port,()=>{
     console.log(`Listen to the port ${port}`)
 })

@@ -5,15 +5,18 @@ import { Op } from "sequelize"
 
 
 export const addProductController=async (req:Request,res:Response)=>{
+    console.log(req.body)
     await productSchema.create({
         name:req.body.name,
-        descritpion:req.body.description,
+        description:req.body.description,
         title:req.body.title,
         base_price:req.body.base_price,
         sellerId:req.body.id,
+        bidderId:req.body.id,
         categoryId:req.params.subCategorie,
         addressId:req.params.address
     })
+    res.status(200).send("Product add successfully")
 }
 export const categories=async (req:Request,res:Response)=>{
     try{

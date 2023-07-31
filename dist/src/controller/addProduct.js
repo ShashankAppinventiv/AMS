@@ -10,10 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.subCategories = exports.categories = exports.addProductController = void 0;
+const product_1 = require("../model/product");
 const categories_1 = require("../model/categories");
 const sequelize_1 = require("sequelize");
 const addProductController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send({ "address": req.params.address });
+    console.log(req.body);
+    yield product_1.productSchema.create({
+        name: req.body.name,
+        description: req.body.description,
+        title: req.body.title,
+        base_price: req.body.base_price,
+        sellerId: req.body.id,
+        bidderId: req.body.id,
+        categoryId: req.params.subCategorie,
+        addressId: req.params.address
+    });
+    res.status(200).send("Product add successfully");
 });
 exports.addProductController = addProductController;
 const categories = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

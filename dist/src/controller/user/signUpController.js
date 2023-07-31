@@ -56,13 +56,11 @@ const isExist = (req) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         if (Object.keys(data).length > 0) {
-            console.log("true");
             return true;
         }
     }
     catch (err) {
         console.log("Some error occure");
     }
-    console.log("false");
     return false;
 });

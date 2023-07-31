@@ -22,7 +22,6 @@ export const loginController=async (req:Request,res:Response)=>{
         token=jwt.sign({id:userData.id},'s1h2a3',{expiresIn:3600})
     if(userData){
         let redisResponse=await redisClient.get(`${userData.id}`);
-        console.log(redisResponse)
         if(redisResponse==null){
             console.log("cache miss")
             let isActiveSession=await sessionSchema.findOne({

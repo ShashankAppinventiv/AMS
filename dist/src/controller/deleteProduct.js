@@ -9,21 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProfileController = void 0;
-const user_1 = require("../../model/user");
-const updateProfileController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.deleteProduct = exports.list = void 0;
+const product_1 = require("../model/product");
+const list = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let id = req.body.id;
-        delete req.body.id;
-        yield user_1.userSchema.update(req.body, {
+        let data = yield product_1.productSchema.findAll({
             where: {
-                id: id
+                sellerId: req.body.id
             }
         });
-        res.status(200).send("Update successfully");
+        res.send(data);
     }
     catch (error) {
         res.status(404).send(error);
     }
 });
-exports.updateProfileController = updateProfileController;
+exports.list = list;
+const deleteProduct = (req, res) => {
+    try {
+        product_1.productSchema.destroy({
+            where: {
+                id: req.params.productId
+            }
+        });
+        res.status(200).send("Product delete successfully");
+    }
+    catch (error) {
+        res.status(404).send(error);
+    }
+};
+exports.deleteProduct = deleteProduct;

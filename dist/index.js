@@ -8,6 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 //database importing
 const redis_1 = require("./src/provider/redis"); //redis
 //importing routers
+//user routes
 const signup_1 = __importDefault(require("./src/router/user/auth/signup"));
 const login_1 = __importDefault(require("./src/router/user/auth/login"));
 const logout_1 = __importDefault(require("./src/router/user/auth/logout"));
@@ -15,7 +16,12 @@ const getProfile_1 = __importDefault(require("./src/router/user/profile/getProfi
 const addAddress_1 = __importDefault(require("./src/router/user/profile/addAddress"));
 const forgetPass_1 = __importDefault(require("./src/router/user/auth/forgetPass"));
 const addPicture_1 = __importDefault(require("./src/router/user/profile/addPicture"));
+const updateProfileDetails_1 = __importDefault(require("./src/router/user/profile/updateProfileDetails"));
+//Product Routes
 const addProduct_1 = __importDefault(require("./src/router/activity/addProduct"));
+const deleteRouter_1 = __importDefault(require("./src/router/activity/deleteRouter"));
+const buyProduct_1 = __importDefault(require("./src/router/activity/buyProduct"));
+const filter_1 = __importDefault(require("./src/router/activity/filter"));
 //All constant decleration
 const app = (0, express_1.default)();
 const port = process.env.PORT;
@@ -29,7 +35,11 @@ app.use("/user", getProfile_1.default);
 app.use("/user", addAddress_1.default);
 app.use('/user', forgetPass_1.default);
 app.use('/user', addPicture_1.default);
+app.use('/user', updateProfileDetails_1.default);
 app.use('/product', addProduct_1.default);
+app.use('/product', deleteRouter_1.default);
+app.use('/product', buyProduct_1.default);
+app.use('/product', filter_1.default);
 (0, redis_1.redFun)(); //function calling for redis connection
 app.listen(port, () => {
     console.log(`Listen to the port ${port}`);
