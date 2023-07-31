@@ -9,9 +9,10 @@ import { userSchema } from "../model/user";
 dotenv.config()
 export const otpMailGenerator=async (req:Request,res:Response,next:()=>void)=>{
     try{
-        if(req.body.otp==undefined){
+        if(!req.body.otp){
+            console.log(req.body)
             let emailAddress=await userSchema.findOne({
-                where: { id: req.body.id },
+                where: { username: req.body.username},
                 attributes: ['email'], // Specify the attributes you want to select
               })
             const emailId=JSON.parse(JSON.stringify(emailAddress))
@@ -44,7 +45,7 @@ export const otpMailGenerator=async (req:Request,res:Response,next:()=>void)=>{
                 html:mail
             }
             transport.sendMail(message).then(()=>{
-                redisclient.setEx(`OTP${req.body.id}`,9000,`${otp}`)
+                redisclient.setEx(`OTP${req.body.username}`,9000,`${otp}`)
                 res.send("Mail Send Successfully")
 
             }).catch((err)=>{

@@ -19,10 +19,11 @@ const user_1 = require("../../model/user");
 dotenv_1.default.config();
 const fpController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let otp = yield redis_1.default.get(`OTP${req.body.id}`);
+        let otp = yield redis_1.default.get(`OTP${req.body.username}`);
+        console.log(otp);
         if (req.body.otp == otp && (req.body.password).length >= 8) {
-            yield user_1.userSchema.update({ password: req.body.password }, { where: { id: req.body.id } });
-            yield redis_1.default.del(`OTP${req.body.id}`);
+            user_1.userSchema.update({ password: req.body.password }, { where: { username: req.body.username } });
+            redis_1.default.del(`OTP${req.body.id}`);
             res.status(201).send("Password changed successfully");
         }
         else {

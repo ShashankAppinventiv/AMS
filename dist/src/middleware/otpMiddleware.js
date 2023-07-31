@@ -22,9 +22,10 @@ const user_1 = require("../model/user");
 dotenv_1.default.config();
 const otpMailGenerator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (req.body.otp == undefined) {
+        if (!req.body.otp) {
+            console.log(req.body);
             let emailAddress = yield user_1.userSchema.findOne({
-                where: { id: req.body.id },
+                where: { username: req.body.username },
                 attributes: ['email'], // Specify the attributes you want to select
             });
             const emailId = JSON.parse(JSON.stringify(emailAddress));
@@ -57,7 +58,7 @@ const otpMailGenerator = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                 html: mail
             };
             transport.sendMail(message).then(() => {
-                redis_1.default.setEx(`OTP${req.body.id}`, 9000, `${otp}`);
+                redis_1.default.setEx(`OTP${req.body.username}`, 9000, `${otp}`);
                 res.send("Mail Send Successfully");
             }).catch((err) => {
                 res.send(err);

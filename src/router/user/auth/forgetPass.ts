@@ -9,7 +9,7 @@ import {otpMailGenerator} from '../../../middleware/otpMiddleware'
 
 const routes=expess();
 
-routes.patch('/forget_password',sessionCheck,otpMailGenerator,fpController)
+routes.patch('/forget_password',otpMailGenerator,fpController)
 
 
 export default routes
