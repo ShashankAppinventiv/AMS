@@ -2,7 +2,7 @@ import expess from 'express'
 
 //controller
 
-import { productFilterController } from '../../controller/productFilterController';
+import { productFilterController } from '../../controller/product/productFilterController';
 
 //Middleware
 import {sessionCheck}  from '../../middleware/session';

@@ -1,5 +1,5 @@
 import { Request,Response } from "express"
-import { addressSchema } from "../model/address"
+import { addressSchema } from "../../model/address"
 
 export const addressController=async (req:Request,res:Response)=>{
     try{

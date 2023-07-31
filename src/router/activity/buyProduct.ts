@@ -2,8 +2,8 @@ import expess from 'express'
 
 //controller
 
-import {list} from '../../controller/viewAllProduct'
-import { viewProductDetails } from '../../controller/buyProduct';
+import {list} from '../../controller/product/viewAllProduct'
+import { viewProductDetails } from '../../controller/product/buyProduct';
 
 //Middleware
 import {sessionCheck}  from '../../middleware/session';

@@ -100,4 +100,13 @@ export const updateValidation=(req:Request,res:Response,next:()=>void)=>{
       });
       const result=userSchema.validate(req.body);
       (result.error)?res.status(404).send(result.error):next()
-    }
+}
+export const DeleteUserValidation=(req:Request,res:Response,next:()=>void)=>{
+    const userSchema=Joi.object({
+        username:Joi.string().min(1).required(),
+        otp:Joi.number().min(4).optional(),
+        password:Joi.string().min(8).optional(),
+      });
+      const result=userSchema.validate(req.body);
+      (result.error)?res.status(404).send(result.error):next()
+}

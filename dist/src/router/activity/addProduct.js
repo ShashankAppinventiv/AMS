@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 //controller
-const addProduct_1 = require("../../controller/addProduct");
-const addressController_1 = require("../../controller/addressController");
+const addProduct_1 = require("../../controller/product/addProduct");
+const addressController_1 = require("../../controller/product/addressController");
 //Middleware
 const session_1 = require("../../middleware/session");
 const joiValidation_1 = require("../../middleware/joiValidation");
