@@ -14,7 +14,6 @@ export const addAddressController=async (req:Request,res:Response)=>{
             zipcode:req.body.zipcode,
             address_type:req.body.address_type
         })
-        console.log(data)
         res.status(201).send(data)
     }catch(error){
         res.send(error)

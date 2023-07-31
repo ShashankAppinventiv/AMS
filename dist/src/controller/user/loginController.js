@@ -35,7 +35,6 @@ const loginController = (req, res) => __awaiter(void 0, void 0, void 0, function
     token = jsonwebtoken_1.default.sign({ id: userData.id }, 's1h2a3', { expiresIn: 3600 });
     if (userData) {
         let redisResponse = yield redis_1.default.get(`${userData.id}`);
-        console.log(redisResponse);
         if (redisResponse == null) {
             console.log("cache miss");
             let isActiveSession = yield session_1.sessionSchema.findOne({

@@ -18,7 +18,8 @@ export const productSchema=sequlizeDB.define("product",{
         type:DataType.FLOAT
     },
     bidding_price:{
-        type:DataType.FLOAT
+        type:DataType.FLOAT,
+        defaultValue:0
     },
     bidderId:{
         type:DataType.INTEGER,
@@ -26,7 +27,6 @@ export const productSchema=sequlizeDB.define("product",{
             model: userSchema, // The name of the referenced table (case-sensitive)
             key: 'id',      // The column in the referenced table to use as the reference
           },
-          allowNull: false,
           onDelete: 'CASCADE'
     },
     sellerId:{

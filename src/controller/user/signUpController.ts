@@ -45,12 +45,10 @@ const isExist=async (req:Request)=>{
             }
     })
     if(Object.keys(data).length>0){
-        console.log("true")
         return true
     }
     }catch(err){
         console.log("Some error occure")
     }
-    console.log("false")
     return false
 }

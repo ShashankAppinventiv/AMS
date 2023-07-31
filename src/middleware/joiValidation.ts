@@ -89,3 +89,15 @@ export const addressValidation=(req:Request,res:Response,next: () => void)=>{
         next();
     }
 }
+export const updateValidation=(req:Request,res:Response,next:()=>void)=>{
+    const userSchema=Joi.object({
+        first_name:Joi.string().min(1).optional(),
+        last_name:Joi.string().min(1).optional(),
+        email:Joi.string().regex(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/).optional(),
+        Mob_number:Joi.number().integer().min(10 ** 9).max(10 ** 10 - 1).optional(),
+        gender:Joi.string().equal(...['male','female']).optional(),
+        DOB:Joi.date().optional()
+      });
+      const result=userSchema.validate(req.body);
+      (result.error)?res.status(404).send(result.error):next()
+    }

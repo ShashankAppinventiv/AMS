@@ -15,7 +15,6 @@ export const getProfileController=async (req:Request,res:Response)=>{
             }
         })
         delete req.body.id
-        console.log(req.body)
         res.send(data)
     }catch(error){
         res.send(error)

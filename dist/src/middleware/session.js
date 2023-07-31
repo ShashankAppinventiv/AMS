@@ -39,9 +39,7 @@ const sessionCheck = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                     ]
                 }
             });
-            console.log(data, decode.id, typeof decode.id);
             data = JSON.parse(JSON.stringify(data));
-            console.log(data);
             if (data) {
                 redis_1.default.setEx(`${decode === null || decode === void 0 ? void 0 : decode.id}`, 3600, "true");
                 next();

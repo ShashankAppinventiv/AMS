@@ -23,7 +23,6 @@ const getProfileController = (req, res) => __awaiter(void 0, void 0, void 0, fun
             }
         });
         delete req.body.id;
-        console.log(req.body);
         res.send(data);
     }
     catch (error) {
