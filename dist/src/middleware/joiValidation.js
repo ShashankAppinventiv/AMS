@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateValidation = exports.addressValidation = exports.loginValidation = exports.productValidator = exports.newUserValidate = void 0;
+exports.DeleteUserValidation = exports.updateValidation = exports.addressValidation = exports.loginValidation = exports.productValidator = exports.newUserValidate = void 0;
 const joi_1 = __importDefault(require("joi"));
 //Fucntion for user validation
 const newUserValidate = (req, res, next) => {
@@ -98,3 +98,13 @@ const updateValidation = (req, res, next) => {
     (result.error) ? res.status(404).send(result.error) : next();
 };
 exports.updateValidation = updateValidation;
+const DeleteUserValidation = (req, res, next) => {
+    const userSchema = joi_1.default.object({
+        username: joi_1.default.string().min(1).required(),
+        otp: joi_1.default.number().min(4).optional(),
+        password: joi_1.default.string().min(8).optional(),
+    });
+    const result = userSchema.validate(req.body);
+    (result.error) ? res.status(404).send(result.error) : next();
+};
+exports.DeleteUserValidation = DeleteUserValidation;

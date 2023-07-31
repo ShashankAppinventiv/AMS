@@ -1,15 +1,16 @@
 import expess from 'express'
 
 //controller
-import {fpController} from '../../../controller/user/forgetPasswordController'
-
-//Middleware
-import { sessionCheck } from '../../../middleware/session';
-import {otpMailGenerator} from '../../../middleware/otpMiddleware'
+import {fpController,otpMailGenerator} from '../../../controller/user/forgetPasswordController'
 
 const routes=expess();
 
-routes.patch('/forget_password',otpMailGenerator,fpController)
+//middleware
+
+import {DeleteUserValidation} from '../../../middleware/joiValidation'
+
+routes.patch('/forget_password',DeleteUserValidation,otpMailGenerator)
+routes.patch('/forget_password/verify',DeleteUserValidation,fpController)
 
 
 export default routes

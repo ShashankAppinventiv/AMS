@@ -1,4 +1,3 @@
-import sequelizeDB from "../../provider/database";
 import {userSchema} from "../../model/user"
 import { Request,Response } from "express";
 import { Op } from "sequelize";

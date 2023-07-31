@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { productSchema } from "../model/product";
+import { productSchema } from "../../model/product";
 import { Request,Response } from "express";
 
 export const list=async (req:Request,res:Response)=>{

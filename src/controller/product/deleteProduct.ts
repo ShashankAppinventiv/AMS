@@ -1,4 +1,4 @@
-import { productSchema } from "../model/product";
+import { productSchema } from "../../model/product";
 import { Request,Response } from "express";
 
 export const list=async (req:Request,res:Response)=>{
@@ -13,7 +13,6 @@ export const list=async (req:Request,res:Response)=>{
         res.status(404).send(error)
     }
 }
-
 export const deleteProduct=(req:Request,res:Response)=>{
     try{
         productSchema.destroy({

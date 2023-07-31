@@ -1,6 +1,6 @@
 import { Request,Response } from "express"
-import {productSchema} from '../model/product'
-import { categoriesSchema } from "../model/categories"
+import {productSchema} from '../../model/product'
+import { categoriesSchema } from "../../model/categories"
 import { Op } from "sequelize"
 
 

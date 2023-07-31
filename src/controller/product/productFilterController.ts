@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
-import { categoriesSchema } from "../model/categories";
-import { productSchema } from "../model/product";
+import { categoriesSchema } from "../../model/categories";
+import { productSchema } from "../../model/product";
 import { Op } from "sequelize";
 
 export const productFilterController=async (req:Request,res:Response)=>{
