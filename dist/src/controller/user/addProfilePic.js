@@ -25,7 +25,6 @@ const addPicController = (req, res) => __awaiter(void 0, void 0, void 0, functio
         let token = "" + req.headers.authorization;
         let decode = jsonwebtoken_1.default.verify(token, secretKey);
         let file = fs_1.default.readFileSync(`./uploads/${req.body.filename}`);
-        console.log(file);
         yield user_1.userSchema.update({ profile: file }, { where: { id: decode === null || decode === void 0 ? void 0 : decode.id } });
         res.status(200).send("Profile picture change successfully");
         fs_1.default.unlink(`./uploads/${req.body.filename}`, (err) => {

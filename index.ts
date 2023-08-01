@@ -1,5 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv'
+import swaggerJsDocs from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
+
 //database importing
 
 import { redFun } from './src/provider/redis'//redis
@@ -25,7 +28,19 @@ const app=express()
 const port=process.env.PORT;
 dotenv.config();
 app.use(express.json())
+//Swagger
+const SwaggerOptions={
+    swaggerDefinition:{
+        info:{
+            title:'Advertisement Managenemt System',
+            version:'1.0.1'
+        }
+    },
+    apis:[]
+}
+const swaggerDocs=swaggerJsDocs((SwaggerOptions))
 
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocs))
 //Routers
 
 app.use('/user',signup)

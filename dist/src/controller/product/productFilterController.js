@@ -8,47 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productFilterController = void 0;
-const categories_1 = require("../../model/categories");
 const product_1 = require("../../model/product");
 const sequelize_1 = require("sequelize");
+const database_1 = __importDefault(require("../../provider/database"));
 const productFilterController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let data = "";
-        if (req.query.Sub_category) {
-            data = yield categories_1.categoriesSchema.findAll({
-                attributes: ['id'],
-                where: { name: req.query.Sub_category }
-            });
-            data = JSON.parse(JSON.stringify(data));
-        }
-        else if (req.query.Category) {
-            data = yield categories_1.categoriesSchema.findOne({
-                attributes: ['id'],
-                where: { name: req.query.Category }
-            });
-            data = JSON.parse(JSON.stringify(data));
-            data = yield categories_1.categoriesSchema.findAll({
-                attributes: ['id'],
-                where: { parentId: data.id }
-            });
-            data = JSON.parse(JSON.stringify(data));
-        }
-        else {
-            let finalData = yield product_1.productSchema.findAll({
-                attributes: ['name', 'title', 'description', 'base_price', 'bidding_price']
-            });
-            return res.send(finalData);
-        }
-        let category_list = [];
-        data.forEach((element) => {
-            category_list.push(element.id);
-        });
+        let Data = yield database_1.default.query(`select array_agg("c2"."id") from "categories" as "c" left join "categories" as "c2" on "c"."id"="c2"."parentId" where "c"."name"='${req.query.Category}'`, { type: sequelize_1.QueryTypes.SELECT });
+        console.log(Data, Data[0]['array_agg']);
         let finalData = yield product_1.productSchema.findAll({
-            attributes: ['name', 'title', 'description', 'base_price', 'bidding_price'],
             where: {
-                categoryId: { [sequelize_1.Op.in]: category_list }
+                categoryId: Data[0]['array_agg']
             }
         });
         res.send(finalData);

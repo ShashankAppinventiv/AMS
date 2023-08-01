@@ -13,7 +13,6 @@ export const addPicController=async (req:Request,res:Response)=>{
         let token=""+req.headers.authorization
         let decode:any=jwt.verify(token,secretKey)
         let file =fs.readFileSync(`./uploads/${req.body.filename}`)
-        console.log(file)
         await userSchema.update(
             {profile:file},
             {where:{id:decode?.id}}

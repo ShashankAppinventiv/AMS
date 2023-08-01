@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 //database importing
 const redis_1 = require("./src/provider/redis"); //redis
 //importing routers
@@ -27,6 +29,18 @@ const app = (0, express_1.default)();
 const port = process.env.PORT;
 dotenv_1.default.config();
 app.use(express_1.default.json());
+//Swagger
+const SwaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: 'Advertisement Managenemt System',
+            version: '1.0.1'
+        }
+    },
+    apis: []
+};
+const swaggerDocs = (0, swagger_jsdoc_1.default)((SwaggerOptions));
+app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
 //Routers
 app.use('/user', signup_1.default);
 app.use('/user', login_1.default);
