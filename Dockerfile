@@ -1,12 +1,13 @@
 FROM node:18.16.1-alpine
 
-WORKDIR /app/AMS
+WORKDIR /app
 
-COPY package*.json
+COPY package*.json ./
 
-RUN npm i
+RUN npm install -g typescript
+RUN npm install
 
-COPY ..
+COPY . .
 
 ENV DB_HOST=localhost
 ENV DB_PORT=5432
@@ -19,7 +20,6 @@ ENV EMAIL='shashank.kumar@appinventiv.com'
 ENV PASSWORD='sglzjktkcybpxrmp'
 
 EXPOSE 3000
-
 
 
 CMD ["npm","start"]

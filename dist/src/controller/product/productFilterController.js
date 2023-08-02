@@ -13,22 +13,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.productFilterController = void 0;
-const product_1 = require("../../model/product");
 const sequelize_1 = require("sequelize");
 const database_1 = __importDefault(require("../../provider/database"));
 const productFilterController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let Data = yield database_1.default.query(`select array_agg("c2"."id") from "categories" as "c" left join "categories" as "c2" on "c"."id"="c2"."parentId" where "c"."name"='${req.query.Category}'`, { type: sequelize_1.QueryTypes.SELECT });
-        console.log(Data, Data[0]['array_agg']);
-        let finalData = yield product_1.productSchema.findAll({
-            where: {
-                categoryId: Data[0]['array_agg']
-            }
-        });
-        res.send(finalData);
+        let data = yield database_1.default.query(`
+            select * from "products" where "categoryId" in (
+            WITH RECURSIVE "last_category" AS (
+                        SELECT "id", "name", 1 AS "level"
+                        FROM "categories" "c"
+                        WHERE "name" = '${req.query.choice}'
+                      
+                        UNION ALL
+                      
+                        SELECT "c2"."id", "c2"."name", "lc"."level" + 1
+                        FROM "categories" "c2"
+                        INNER JOIN "last_category" "lc" ON "c2"."parentId" = "lc"."id"
+                        WHERE "c2"."parentId" IS NOT NULL 
+                        )
+                      select "id"
+                      FROM "last_category"
+            )`, { type: sequelize_1.QueryTypes.SELECT });
+        res.status(200).send(data);
     }
     catch (error) {
-        res.send(error);
+        res.status(404).send(error);
     }
 });
 exports.productFilterController = productFilterController;

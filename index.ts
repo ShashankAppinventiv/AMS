@@ -36,7 +36,7 @@ const SwaggerOptions={
             version:'1.0.1'
         }
     },
-    apis:[]
+    apis:['./swagger/swagger-user.yaml']
 }
 const swaggerDocs=swaggerJsDocs((SwaggerOptions))
 

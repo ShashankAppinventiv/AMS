@@ -13,8 +13,8 @@ module.exports = {
      * }], {});
     */
     return queryInterface.bulkInsert('categories', [{
-      name:'ios',
-      parentId:4,
+      name:'diesel',
+      parentId:3,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

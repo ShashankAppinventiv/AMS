@@ -37,7 +37,7 @@ const SwaggerOptions = {
             version: '1.0.1'
         }
     },
-    apis: []
+    apis: ['./swagger/swagger-user.yaml']
 };
 const swaggerDocs = (0, swagger_jsdoc_1.default)((SwaggerOptions));
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));

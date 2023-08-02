@@ -7,10 +7,6 @@ import {loginController} from '../../../controller/user/loginController'
 //Middleware
 import {loginValidation}  from '../../../middleware/joiValidation';
 const routes=expess();
-/**
- * @swagger
- * 
- */
 routes.post('/signin',loginValidation,loginController)
 
 
